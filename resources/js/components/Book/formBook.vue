@@ -19,7 +19,7 @@
           />
         </div>
         <div class="col">
-          <button class="btn-success btn" @click.prevent="addBook">Add</button>
+          <button class="btn-primary btn" @click.prevent="addBook">Add</button>
         </div>
       </div>
     </div>

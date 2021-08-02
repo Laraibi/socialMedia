@@ -3,6 +3,10 @@ require('./bootstrap');
 import {createApp} from 'vue'
 import App from './components/App.vue'
 import "bootstrap-icons/font/bootstrap-icons.css";
+// import VueRouter from 'vue-router'
+import router from './router'
 
-
-createApp(App).mount("#App")
+const app = createApp(App)
+app.use(router)
+app.mount("#App")
+// App.use(VueRouter)

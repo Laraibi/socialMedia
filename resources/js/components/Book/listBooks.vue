@@ -1,6 +1,5 @@
 <template>
   <div class="row justify-content-center">
-    <!-- {{listBooks}} -->
     <div class="col-8">
       <formBook @pushBook="pushBook"></formBook>
     </div>

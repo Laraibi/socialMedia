@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\PersonneController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 // use BookController;
@@ -20,3 +21,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 route::resource('books',BookController::class);
+route::resource('personnes',PersonneController::class);
