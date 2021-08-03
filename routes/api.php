@@ -4,6 +4,8 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\PersonneController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\UserController;
 // use BookController;
 /*
 |--------------------------------------------------------------------------
@@ -16,9 +18,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-route::resource('books',BookController::class);
-route::resource('personnes',PersonneController::class);
+
+Route::post('login', [UserController::class, 'login']);
+Route::post('register', [UserController::class, 'register']);
+Route::post('logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
+
+
+route::resource('books',BookController::class)->middleware('auth:sanctum');
+route::resource('personnes',PersonneController::class)->middleware('auth:sanctum');

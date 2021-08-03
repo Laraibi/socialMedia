@@ -15,10 +15,22 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
+          <div class="navbar-nav" v-if="isLoggedIn">
+            <router-link to="/home" class="nav-item nav-link">Home</router-link>
             <router-link to="/Books" class="nav-link">Books</router-link>
             <router-link to="/Personnes" class="nav-link"
               >Personnes</router-link
+            >
+            <a class="nav-item nav-link" style="cursor: pointer" @click="logout"
+              >Logout</a
+            >
+          </div>
+          <div class="navbar-nav" v-else>
+            <router-link to="/login" class="nav-item nav-link"
+              >login</router-link
+            >
+            <router-link to="/register" class="nav-item nav-link"
+              >Register</router-link
             >
           </div>
         </div>
@@ -31,11 +43,37 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
   data() {
     return {
       Message: "Books Management",
+      isLoggedIn: false,
     };
+  },
+  created() {
+    if (window.Laravel.isLoggedin) {
+      this.isLoggedIn = true;
+    }
+  },
+  methods: {
+    logout(e) {
+      e.preventDefault();
+      axios.get("/sanctum/csrf-cookie").then((response) => {
+        axios
+          .post("/api/logout")
+          .then((response) => {
+            if (response.data.success) {
+              window.location.href = "/";
+            } else {
+              console.log(response);
+            }
+          })
+          .catch(function (error) {
+            console.error(error);
+          });
+      });
+    },
   },
 };
 </script>

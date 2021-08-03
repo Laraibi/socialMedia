@@ -108,6 +108,12 @@ export default {
         .then((this.editingKey = -1));
     },
   },
+    beforeRouteEnter(to, from, next) {
+        if (!window.Laravel.isLoggedin) {
+            window.location.href = "/";
+        }
+        next();
+    }
 };
 </script>
 

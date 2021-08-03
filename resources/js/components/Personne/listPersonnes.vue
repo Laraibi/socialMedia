@@ -49,7 +49,7 @@
                 <i class="bi bi-pencil-square"></i>
               </button>
               <button class="btn btn-danger" @click="deletePersonne(key)">
-                <i class="bi bi-trash-fill" ></i>
+                <i class="bi bi-trash-fill"></i>
               </button>
               <button
                 v-if="key == editingKey"
@@ -99,9 +99,17 @@ export default {
     // },
     updatePersonne(key) {
       axios
-        .put("/api/personnes/"+this.listPersonne[key].id, { ...this.listPersonne[key] })
+        .put("/api/personnes/" + this.listPersonne[key].id, {
+          ...this.listPersonne[key],
+        })
         .then(() => (this.editingKey = -1));
     },
+  },
+  beforeRouteEnter(to, from, next) {
+    if (!window.Laravel.isLoggedin) {
+      window.location.href = "/";
+    }
+    next();
   },
 };
 </script>
