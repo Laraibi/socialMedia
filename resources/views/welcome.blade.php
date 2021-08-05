@@ -30,7 +30,7 @@
     <script>
         window.Laravel = JSON.parse(atob('{{ base64_encode(json_encode($user_auth_data)) }}'));
     </script>
-    <div id="App" class="container">
+    <div id="App" class="container-lg container-fluid-sm" >
 
     </div>
 

@@ -62,6 +62,7 @@ class UserController extends Controller
         $response = [
             'success' => $success,
             'message' => $message,
+            // 'check' => Auth::check()
         ];
         return response()->json($response);
     }
@@ -87,15 +88,16 @@ class UserController extends Controller
         ];
         return response()->json($response);
     }
-    public function getUsers(){
+    public function getUsers()
+    {
         // return response()->json(User::all()->only(['id','name']));
         $user = Auth::user();
-        return response()->json(User::where('id','<>',$user->id)->get());
+        return response()->json(User::where('id', '<>', $user->id)->get());
     }
 
-    public function getUser(Request $request){
-        $request->validate(['user_id'=>'required']);
+    public function getUser(Request $request)
+    {
+        $request->validate(['user_id' => 'required']);
         return response()->json(User::find($request->user_id));
-
     }
 }

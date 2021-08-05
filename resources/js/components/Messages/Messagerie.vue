@@ -1,38 +1,30 @@
 <template>
   <div class="row">
-    <div class="col-6">
-      <ul class="" v-if="userMessages.length > 0">
+    <div class="col-2">
+      <ul class="p-0 m-0" v-if="userMessages.length > 0">
         <li class="nav-item" v-for="(user, key) in discusionsUsers" :key="key">
           <router-link
-            class="nav-link"
+          
+            class="nav-link disscussionITems"
             :to="{ name: 'discussion', params: { id: user.id } }"
             >{{ user.name }}</router-link
           >
         </li>
       </ul>
-      <div>
-        <router-view></router-view>
-      </div>
     </div>
-    <div class="col-6">
-      <sent-message></sent-message>
+    <div id="disscusion" class="col-10">
+      <router-view></router-view>
     </div>
-
-    <!-- {{ discusionsUsers }} -->
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import Message from "./Message.vue";
-import sentMessage from "./sentMessage.vue";
-// import discussion from "./discussion.vue";
-// import listDiscussion from "./listDiscussion.vue";
 export default {
   name: "Messagerie",
   components: {
     Message,
-    sentMessage,
   },
   data() {
     return {
@@ -41,7 +33,6 @@ export default {
   },
   computed: {
     discusionsUsers() {
-      //   console.log(window.Laravel.user.id);
       let arr = [];
       this.userMessages.forEach((item) => {
         if (
@@ -68,7 +59,19 @@ export default {
 </script>
 
 <style>
-ul{
-    list-style: none;
+ul {
+  list-style: none;
+}
+.disscussionITems {
+  background-color: #279fb9 !important  ;
+  margin :2px 0 !important;
+  color:thistle;
+  text-align: center;
+}
+.disscussionITems:hover,.router-link-active  {
+  opacity: 0.7;
+  /* background-color: #279fb9 !important  ; */
+  /* margin :2px 0 !important;
+  color:thistle; */
 }
 </style>

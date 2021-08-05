@@ -37,6 +37,7 @@ class MessageController extends Controller
         $Message = Message::find($request->id);
         if ($Message) {
             return response()->json(array(
+                'senderId'=>$Message->sender->id,
                 'senderName' => $Message->sender->name,
                 'receiverName' => $Message->receiver->name,
                 'body' => $Message->body,
@@ -57,7 +58,7 @@ class MessageController extends Controller
         $request->validate(['withUserId'=>'required']);
         $user = Auth::user();
         // return 'hs';
-        // dd($user->disscussion($request->withUserId));
+        // dd($user->discussion($request->withUserId));
         return response()->json($user->discussion($request->withUserId));
     }
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="row justify-content-center">
-    <div class="col-6">
+    <div class="col-3">
       <div class="card">
         <div class="card-header">
           <h4 class="card-title">Register</h4>
