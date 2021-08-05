@@ -1,34 +1,54 @@
-import {createWebHistory, createRouter} from "vue-router";
-import listBooks from '../components/Book/listBooks.vue';
-import listPersonnes from '../components/Personne/listPersonnes.vue';
-import home from '../components/auth/home.vue';
-import login from '../components/auth/login.vue';
-import register from '../components/auth/register.vue';
-export const routes = [
+import { createWebHistory, createRouter } from "vue-router";
+import listBooks from "../components/Book/listBooks.vue";
+import listPersonnes from "../components/Personne/listPersonnes.vue";
+import discussion from "../components/Messages/discussion.vue";
+import noDiscussion  from "../components/Messages/noDiscussion.vue";
+import Messagerie from "../components/Messages/Messagerie.vue";
+import home from "../components/auth/home.vue";
+import login from "../components/auth/login.vue";
+import register from "../components/auth/register.vue";
+const routes = [
     {
-        name: 'Books',
-        path: '/Books',
-        component: listBooks
+        name: "Books",
+        path: "/Books",
+        component: listBooks,
     },
     {
-        name: 'Personnes',
-        path: '/Personnes',
-        component: listPersonnes
+        name: "Personnes",
+        path: "/Personnes",
+        component: listPersonnes,
     },
     {
-        name: 'home',
-        path: '/home',
-        component: home
+        name: "Messagerie",
+        path: "/Messagerie",
+        component: Messagerie,
+        children: [
+            {
+                path:'',
+                component:noDiscussion
+            },
+            {
+                name: "discussion",
+                path: ":id",
+                component: discussion,
+                props: true,
+            }
+        ],
     },
     {
-        name: 'login',
-        path: '/login',
-        component: login
+        name: "home",
+        path: "/home",
+        component: home,
     },
     {
-        name: 'register',
-        path: '/register',
-        component: register
+        name: "login",
+        path: "/",
+        component: login,
+    },
+    {
+        name: "register",
+        path: "/register",
+        component: register,
     },
 ];
 

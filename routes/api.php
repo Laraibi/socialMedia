@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PersonneController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -30,3 +31,9 @@ Route::post('logout', [UserController::class, 'logout'])->middleware('auth:sanct
 
 route::resource('books',BookController::class)->middleware('auth:sanctum');
 route::resource('personnes',PersonneController::class)->middleware('auth:sanctum');
+route::resource('messages',MessageController::class)->middleware('auth:sanctum');
+route::get('messageDetails',[MessageController::class,'getMessageDetails'])->middleware('auth:sanctum');
+route::post('sendMessage',[MessageController::class,'sendMessage'])->middleware('auth:sanctum');
+route::get('getDisscussion',[MessageController::class,'getDisscussion'])->middleware('auth:sanctum');
+route::get('users',[UserController::class,'getUsers'])->middleware('auth:sanctum');
+route::get('getUser',[UserController::class,'getUser'])->middleware('auth:sanctum');

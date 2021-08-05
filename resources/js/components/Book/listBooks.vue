@@ -51,8 +51,9 @@
               <button
                 class="btn btn-success"
                 v-if="editingKey == key"
-                @click="saveBook(key)">
-               <i class="bi bi-save"></i>
+                @click="saveBook(key)"
+              >
+                <i class="bi bi-save"></i>
               </button>
             </td>
           </tr>
@@ -108,17 +109,17 @@ export default {
         .then((this.editingKey = -1));
     },
   },
-    beforeRouteEnter(to, from, next) {
-        if (!window.Laravel.isLoggedin) {
-            window.location.href = "/";
-        }
-        next();
+  beforeRouteEnter(to, from, next) {
+    if (!window.Laravel.isLoggedin) {
+      window.location.href = "/";
     }
+    next();
+  },
 };
 </script>
 
 <style>
-td{
-    white-space: nowrap;
+td {
+  white-space: nowrap;
 }
 </style>

@@ -21,14 +21,13 @@
             <router-link to="/Personnes" class="nav-link"
               >Personnes</router-link
             >
+            <router-link to="/Messagerie" class="nav-link">Messagerie</router-link>
             <a class="nav-item nav-link" style="cursor: pointer" @click="logout"
               >Logout</a
             >
           </div>
           <div class="navbar-nav" v-else>
-            <router-link to="/login" class="nav-item nav-link"
-              >login</router-link
-            >
+            <router-link to="/" class="nav-item nav-link">login</router-link>
             <router-link to="/register" class="nav-item nav-link"
               >Register</router-link
             >
@@ -37,20 +36,30 @@
       </div>
     </nav>
     <div class="row">
-      <router-view />
+      <transition name="slide-right">
+        <router-view></router-view>
+      </transition>
     </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 export default {
   data() {
     return {
       Message: "Books Management",
       isLoggedIn: false,
+      transitionName: "",
     };
   },
+  // watch: {
+  //   '$route'(to, from) {
+  //     const toDepth = to.path.split("/").length;
+  //     const fromDepth = from.path.split("/").length;
+  //     this.transitionName = toDepth < fromDepth ? "slide-right" : "slide-left";
+  //   },
+  // },
   created() {
     if (window.Laravel.isLoggedin) {
       this.isLoggedIn = true;

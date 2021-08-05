@@ -87,4 +87,15 @@ class UserController extends Controller
         ];
         return response()->json($response);
     }
+    public function getUsers(){
+        // return response()->json(User::all()->only(['id','name']));
+        $user = Auth::user();
+        return response()->json(User::where('id','<>',$user->id)->get());
+    }
+
+    public function getUser(Request $request){
+        $request->validate(['user_id'=>'required']);
+        return response()->json(User::find($request->user_id));
+
+    }
 }
