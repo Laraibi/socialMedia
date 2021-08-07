@@ -3,6 +3,7 @@
     <div class="col-2">
       <ul class="p-0 m-0" v-if="userMessages.length > 0">
         <li class="nav-item" v-for="(user, key) in discusionsUsers" :key="key">
+          
           <router-link
           
             class="nav-link disscussionITems"

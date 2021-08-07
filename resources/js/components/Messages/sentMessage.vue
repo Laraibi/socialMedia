@@ -1,18 +1,17 @@
 <template>
-  <div class="row">
-    <div class="row">
-      <div class="col-10">
-        <textarea
-          placeholder="Nouveau Message"
-          class="form-control"
-          id="body"
+  <div class="row"  >
+      <div class="col-9">
+        <el-input
+          type="textarea"
+          :rows="2"
+          placeholder="Nouveau Messaget"
           v-model="messageBody"
-        ></textarea>
+        >
+        </el-input>
       </div>
       <div class="col-2">
-        <button class="btn btn-primary h-100 w-100" @click="send">Send</button>
+        <el-button type="success" class="h-100 w-100 " @click="send">Send<i class="el-icon-upload2 el-icon-right"></i></el-button>
       </div>
-    </div>
   </div>
 </template>
 
@@ -28,10 +27,6 @@ export default {
   },
   data() {
     return { messageBody: "" };
-  },
-  created() {
-    // axios.get("/api/users").then((res) => (this.usersList = res.data));
-    // axios.get("/api/users").then((res) => (console.log(res.data)));
   },
   methods: {
     send() {
@@ -49,8 +44,4 @@ export default {
 </script>
 
 <style>
-.btn-primary{
-  background-color: #7DCFB6;
-  border:#7DCFB6 !important;
-}
 </style>

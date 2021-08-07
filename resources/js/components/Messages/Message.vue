@@ -1,19 +1,10 @@
 <template>
-  <div class="row m-1 p-2 message" :class="senderName == 'you' ? 'bg-success' : 'bg-info'" >
-    <div class="col-3">
-      <div class="row text-center justify-content-center">
-        {{ senderName }}
-      </div>
-      <div class="row text-center justify-content-center">
-        {{ Message.date }}
-      </div>
-    </div>
-    <div class="col-9 h-100">
-      <span class="align-middle">
-        {{ Message.body }}
-      </span>
-    </div>
-  </div>
+    <el-timeline-item :timestamp="Message.date" placement="top"  v-loading="loading" element-loading-text="Chargement...">
+      <el-card :class="senderName == 'you' ? 'bg-success' : 'bg-info'" class="success">
+        <h4> <strong> {{ senderName }}</strong></h4>
+        <p class="mx-5">{{ Message.body }}</p>
+      </el-card>
+    </el-timeline-item>
 </template>
 
 <script>
@@ -29,7 +20,7 @@ export default {
   },
   data() {
     return {
-      Message: {},
+      Message: {},loading:true
     };
   },
   computed: {
@@ -48,6 +39,7 @@ export default {
           this.Message.date = moment(this.Message.date).format(
             "YYYY-MM-DD HH:mm:ss"
           );
+          this.loading=false
           // console.log
         });
       }
@@ -69,9 +61,11 @@ export default {
   border-radius: 10px;
 }
 .bg-success{
-  background-color: #7DCFB6 !important;
+  background-color: #67C23A !important;
+  color :#DCDFE6;
 }
 .bg-info{
-  background-color: #279FB9 !important;
+  background-color: #909399 !important;
+  color :#DCDFE6;
 }
 </style>
