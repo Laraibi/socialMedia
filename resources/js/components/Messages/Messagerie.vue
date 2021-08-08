@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col-3">
-      <ul class="p-0 m-0" v-if="userMessages.length > 0">
+      <ul class="p-0 m-0">
         <li class="nav-item">
           <el-select-v2
             v-model="newDisscussionSelectedUsers"
@@ -12,7 +12,7 @@
             class="w-100"
           />
         </li>
-        <li class="nav-item" v-for="(user, key) in discusionsUsers" :key="key">
+        <li  v-if="userMessages.length > 0" class="nav-item" v-for="(user, key) in discusionsUsers" :key="key">
           <router-link
             class="nav-link disscussionITems"
             :to="{ name: 'discussion', params: { id: user.id } }"
