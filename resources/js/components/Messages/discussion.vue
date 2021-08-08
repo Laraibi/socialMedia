@@ -1,5 +1,5 @@
 <template>
-  <sent-message :receiverId="id"></sent-message>
+  <sent-message :receiverId="id" @reLoad="load"></sent-message>
   <!-- <div class="my-2" id="disscussion"> -->
   <el-timeline id="disscussion" class="my-2"  v-loading="loading">
     <message v-for="(msg, key) in Messages" :key="key" :id="msg.id"></message>
