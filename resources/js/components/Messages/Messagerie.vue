@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col-3">
-      <ul class="p-0 m-0">
+      <ul class="p-0 m-0" v-if="userMessages.length > 0">
         <li class="nav-item">
           <el-select-v2
             v-model="newDisscussionSelectedUsers"
@@ -12,12 +12,24 @@
             class="w-100"
           />
         </li>
-        <li  v-if="userMessages.length > 0" class="nav-item" v-for="(user, key) in discusionsUsers" :key="key">
+        <li class="nav-item" v-for="(user, key) in discusionsUsers" :key="key">
           <router-link
             class="nav-link disscussionITems"
             :to="{ name: 'discussion', params: { id: user.id } }"
             >{{ user.name }}</router-link
           >
+        </li>
+      </ul>
+      <ul class="p-0 m-0" v-else>
+        <li class="nav-item">
+          <el-select-v2
+            v-model="newDisscussionSelectedUsers"
+            filterable
+            :options="selectOptions"
+            placeholder="Nouvelle Discussion"
+            @change="addDisscussion"
+            class="w-100"
+          />
         </li>
       </ul>
     </div>
@@ -113,7 +125,8 @@ export default {
 ul {
   list-style: none;
 }
-.disscussionITems,el-select-v2 {
+.disscussionITems,
+el-select-v2 {
   background-color: #279fb9 !important  ;
   margin: 2px 0 !important;
   color: thistle;

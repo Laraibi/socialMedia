@@ -1,23 +1,13 @@
 import { createWebHistory, createRouter } from "vue-router";
-import listBooks from "../components/Book/listBooks.vue";
-import listPersonnes from "../components/Personne/listPersonnes.vue";
 import discussion from "../components/Messages/discussion.vue";
 import noDiscussion  from "../components/Messages/noDiscussion.vue";
 import Messagerie from "../components/Messages/Messagerie.vue";
 import home from "../components/auth/home.vue";
 import login from "../components/auth/login.vue";
 import register from "../components/auth/register.vue";
+import profile from "../components/auth/profile.vue";
 const routes = [
-    {
-        name: "Books",
-        path: "/Books",
-        component: listBooks,
-    },
-    {
-        name: "Personnes",
-        path: "/Personnes",
-        component: listPersonnes,
-    },
+
     {
         name: "Messagerie",
         path: "/Messagerie",
@@ -44,6 +34,11 @@ const routes = [
         name: "login",
         path: "/",
         component: login,
+    },
+    {
+        name: "profile",
+        path: "/profile",
+        component: profile,
     },
     {
         name: "register",

@@ -80,17 +80,30 @@ class UserController extends Controller
             $success = false;
             $message = $ex->getMessage();
         }
-
-        // response
         $response = [
             'success' => $success,
             'message' => $message,
         ];
         return response()->json($response);
     }
+
+    public function editProfile(Request $request)
+    {
+        $request->validate(['user_id' => 'required', 'name' => 'required']);
+        $user = User::find($request->user_id);
+        if ($user) {
+            $user->name = $request->name;
+            $user->DateOfBirth = $request->Dob;
+            $user->image_path = $request->user_image;
+            $user->save();
+            return response()->json($user);
+        } else {
+            return response('user not found', 404);
+        }
+    }
+
     public function getUsers()
     {
-        // return response()->json(User::all()->only(['id','name']));
         $user = Auth::user();
         return response()->json(User::where('id', '<>', $user->id)->get());
     }

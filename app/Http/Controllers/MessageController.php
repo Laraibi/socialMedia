@@ -40,6 +40,8 @@ class MessageController extends Controller
                 'senderId'=>$Message->sender->id,
                 'senderName' => $Message->sender->name,
                 'receiverName' => $Message->receiver->name,
+                'sender' => $Message->sender,
+                'receiver' => $Message->receiver,
                 'body' => $Message->body,
                 'date' => $Message->created_at,
             ));
@@ -57,8 +59,6 @@ class MessageController extends Controller
     public function getDisscussion(Request $request){
         $request->validate(['withUserId'=>'required']);
         $user = Auth::user();
-        // return 'hs';
-        // dd($user->discussion($request->withUserId));
         return response()->json($user->discussion($request->withUserId));
     }
 }

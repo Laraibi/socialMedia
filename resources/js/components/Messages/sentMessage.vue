@@ -6,6 +6,7 @@
           :rows="2"
           placeholder="Nouveau Messaget"
           v-model="messageBody"
+          @keyup.enter="send"
         >
         </el-input>
       </div>

@@ -17,11 +17,10 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav" v-if="isLoggedIn">
             <router-link to="/home" class="nav-item nav-link">Home</router-link>
-            <router-link to="/Books" class="nav-link">Books</router-link>
-            <router-link to="/Personnes" class="nav-link"
-              >Personnes</router-link
+            <router-link to="/profile" class="nav-link">Profile</router-link>
+            <router-link to="/Messagerie" class="nav-link"
+              >Messagerie</router-link
             >
-            <router-link to="/Messagerie" class="nav-link">Messagerie</router-link>
             <a class="nav-item nav-link" style="cursor: pointer" @click="logout"
               >Logout</a
             >
@@ -36,9 +35,7 @@
       </div>
     </nav>
     <div class="row">
-      <transition name="slide-right">
-        <router-view></router-view>
-      </transition>
+      <router-view></router-view>
     </div>
   </div>
 </template>
