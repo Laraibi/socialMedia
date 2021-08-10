@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-3">
+    <div class="col-2">
       <ul class="p-0 m-0" v-if="userMessages.length > 0">
         <li class="nav-item">
           <el-select-v2
@@ -33,7 +33,7 @@
         </li>
       </ul>
     </div>
-    <div id="disscusion" class="col-9">
+    <div id="disscusion" class="col-10">
       <router-view></router-view>
     </div>
   </div>

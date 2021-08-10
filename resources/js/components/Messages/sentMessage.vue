@@ -10,7 +10,7 @@
         >
         </el-input>
       </div>
-      <div class="col-2">
+      <div class="col-3">
         <el-button type="success" class="h-100 w-100 " @click="send">Envoyer<i class="el-icon-upload2 el-icon-right"></i></el-button>
       </div>
   </div>

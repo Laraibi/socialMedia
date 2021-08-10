@@ -1,17 +1,26 @@
 <template>
-  <sent-message :receiverId="id" @reLoad="load"></sent-message>
-  <!-- <div class="my-2" id="disscussion"> -->
-  <el-timeline id="disscussion" class="my-2"  v-loading="loading">
-    <message v-for="(msg, key) in Messages" :key="key" :id="msg.id"></message>
-  </el-timeline>
-  <!-- </div> -->
+  <div class="row">
+    <div class="col-8">
+      <sent-message :receiverId="id" @reLoad="load"></sent-message>
+      <el-timeline id="disscussion" class="my-2" v-loading="loading">
+        <message
+          v-for="(msg, key) in Messages"
+          :key="key"
+          :id="msg.id"
+        ></message>
+      </el-timeline>
+    </div>
+    <div class="col-4">
+      <user-card :id="id"></user-card>
+    </div>
+  </div>
 </template>
 
 <script>
 import axios from "axios";
 import Message from "./Message.vue";
-
 import sentMessage from "./sentMessage.vue";
+import userCard from "./userCard.vue";
 export default {
   name: "discussion",
   props: {
@@ -23,10 +32,12 @@ export default {
   components: {
     Message,
     sentMessage,
+    userCard,
   },
   data() {
     return {
-      Messages: [],loading:true,
+      Messages: [],
+      loading: true,
     };
   },
   watch: {
@@ -37,14 +48,12 @@ export default {
   methods: {
     load() {
       this.Messages = [];
-        this.loading=true
+      this.loading = true;
       if (this.id != -1) {
-        axios
-          .get("/api/getDisscussion?withUserId=" + this.id)
-          .then((res) => {
-            this.Messages = res.data
-            this.loading=false
-            });
+        axios.get("/api/getDisscussion?withUserId=" + this.id).then((res) => {
+          this.Messages = res.data;
+          this.loading = false;
+        });
       }
     },
   },
