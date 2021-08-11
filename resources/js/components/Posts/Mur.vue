@@ -5,24 +5,24 @@
   ></el-row>
   <el-row type="flex" class="row-bg" justify="center">
     <el-col :span="16">
-      <post
+      <post-item
         class="my-2"
         v-for="(post, key) in Posts"
         :key="key"
         :PostItem="post"
-      ></post> </el-col
+      ></post-item> </el-col
   ></el-row>
 </template>
 
 <script>
-import Post from "./Post.vue";
+import postItem from './postItem.vue';
 import addPost from "./addPost.vue";
 import axios from "axios";
 
 export default {
   name: "Mur",
   components: {
-    Post,
+    postItem,
     addPost,
   },
   data() {

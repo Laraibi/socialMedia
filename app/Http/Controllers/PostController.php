@@ -17,8 +17,7 @@ class PostController extends Controller
     public function index()
     {
         //
-        $posts=Post::all();
-        // return response()->json($posts);
+        $posts=Post::orderBy('created_at','desc')->get();
         return PostResource::collection($posts);
     }
 

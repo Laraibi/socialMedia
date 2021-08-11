@@ -3,7 +3,7 @@
   <el-card :body-style="{ padding: '0px' }">
     <div id="header">
       <div class="row p-3">
-        <div class="col  border-bottom pb-2 d-flex align-items-center">
+        <div class="col border-bottom pb-2 d-flex align-items-center">
           <img
             :src="userImage"
             style="height: 3rem; width: 3rem; border-radius: 50%"
@@ -11,13 +11,12 @@
           />
           <!-- </div>
         <div class="col"> -->
-          <span class="text-bold  display-5 mx-2">{{ PostItem.user.name }}</span>
-          <time class="time ms-auto me-2  ">
+          <span class="text-bold display-5 mx-2">{{ PostItem.user.name }}</span>
+          <time class="time ms-auto me-2">
             <small
               ><em>{{ created_at }}</em></small
             >
           </time>
-
         </div>
       </div>
     </div>
@@ -31,9 +30,16 @@
     <!-- <img v-if="postImage" :src="postImage" class="image" /> -->
     <div style="padding: 14px">
       <span>{{ PostItem.content }}</span>
-      <div class="top">
-        <el-button type="text" class="button">J'aime</el-button>
-        <el-button type="text" class="button">Commenter</el-button>
+      <div class="bottom mt-2">
+        <el-badge :value="likesCount" class="mx-2">
+          <el-button type="info" icon="el-icon-heart-empty" plain
+            >J'aime</el-button
+          >
+        </el-badge>
+
+        <el-badge :value="commentsCount" class="mx-2">
+          <el-button type="info" icon="el-icon-s-comment" plain>Commenter</el-button>
+        </el-badge>
       </div>
     </div>
   </el-card>
@@ -42,7 +48,7 @@
 <script>
 import moment from "moment";
 export default {
-  name: "Post",
+  name: "postItem",
   props: {
     PostItem: {
       type: Object,
@@ -50,6 +56,13 @@ export default {
     },
   },
   computed: {
+    likesCount() {
+      return 18;
+    },
+    commentsCount() {
+      return 10;
+    },
+
     userImage() {
       if (
         this.PostItem.user.image_path &&
