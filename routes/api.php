@@ -3,6 +3,7 @@
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PersonneController;
+use App\Http\Controllers\PostController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\uploadController;
@@ -37,3 +38,5 @@ route::get('users',[UserController::class,'getUsers'])->middleware('auth:sanctum
 route::get('getUser',[UserController::class,'getUser'])->middleware('auth:sanctum');
 route::post('editProfile',[UserController::class,'editProfile'])->middleware('auth:sanctum');
 route::post('uploadImage',[uploadController::class,'uploadImage']);
+
+route::resource('posts',PostController::class);

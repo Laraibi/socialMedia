@@ -6,6 +6,7 @@ import home from "../components/auth/home.vue";
 import login from "../components/auth/login.vue";
 import register from "../components/auth/register.vue";
 import profile from "../components/auth/profile.vue";
+import Mur from "../components/Posts/Mur.vue";
 const routes = [
 
     {
@@ -39,6 +40,11 @@ const routes = [
         name: "profile",
         path: "/profile",
         component: profile,
+    },
+    {
+        name: "Mur",
+        path: "/Mur",
+        component: Mur,
     },
     {
         name: "register",

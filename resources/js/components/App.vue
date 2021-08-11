@@ -1,42 +1,41 @@
 <template>
-  <div class="row">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav" v-if="isLoggedIn">
-            <router-link to="/home" class="nav-item nav-link">Home</router-link>
-            <router-link to="/profile" class="nav-link">Profile</router-link>
-            <router-link to="/Messagerie" class="nav-link"
-              >Messagerie</router-link
-            >
-            <a class="nav-item nav-link" style="cursor: pointer" @click="logout"
-              >Logout</a
-            >
-          </div>
-          <div class="navbar-nav" v-else>
-            <router-link to="/" class="nav-item nav-link">login</router-link>
-            <router-link to="/register" class="nav-item nav-link"
-              >Register</router-link
-            >
-          </div>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3 sticky-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav" v-if="isLoggedIn">
+          <router-link to="/home" class="nav-item nav-link">Home</router-link>
+          <router-link to="/profile" class="nav-link">Profile</router-link>
+          <router-link to="/Messagerie" class="nav-link"
+            >Messagerie</router-link
+          >
+          <router-link to="/Mur" class="nav-link">Mur</router-link>
+          <a class="nav-item nav-link" style="cursor: pointer" @click="logout"
+            >Logout</a
+          >
+        </div>
+        <div class="navbar-nav" v-else>
+          <router-link to="/" class="nav-item nav-link">login</router-link>
+          <router-link to="/register" class="nav-item nav-link"
+            >Register</router-link
+          >
         </div>
       </div>
-    </nav>
-    <div class="row">
-      <router-view></router-view>
     </div>
+  </nav>
+  <div class="row container">
+    <router-view></router-view>
   </div>
 </template>
 

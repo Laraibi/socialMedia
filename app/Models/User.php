@@ -8,12 +8,13 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use App\Models\Message;
+use App\Models\like;
 use Illuminate\Support\Facades\Auth;
 // HasApiTokens
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable,HasApiTokens;
+    use HasFactory, Notifiable, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -59,10 +60,12 @@ class User extends Authenticatable
     }
     public function discussion(int $withUserId)
     {
-        // return $this->hasMany(Message::class, 'receiver_id')->where('sender_id', $withUserId)->get()->merge($this->hasMany(Message::class, 'sender_id')->where('receiver_id', $withUserId)->get())->sortBy('created_at')->all();
-        // return Message::whereIn('receiver_id',[$withUserId,$this->id])->orWhereIn('sender_id',[$withUserId,$this->id])->orderBy('created_at','desc')->get();
-        return Message::whereIn('receiver_id',[$withUserId,$this->id])->WhereIn('sender_id',[$withUserId,$this->id])->orderBy('created_at','desc')->get();
-
-
+        return Message::whereIn('receiver_id', [$withUserId, $this->id])->WhereIn('sender_id', [$withUserId, $this->id])->orderBy('created_at', 'desc')->get();
+    }
+    public function Posts(){
+        return $this->hasMany(Post::class);
+    }
+    public function Likes(){
+        return $this->hasMany(like::class);
     }
 }

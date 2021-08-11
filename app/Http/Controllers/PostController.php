@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -15,6 +17,9 @@ class PostController extends Controller
     public function index()
     {
         //
+        $posts=Post::all();
+        // return response()->json($posts);
+        return PostResource::collection($posts);
     }
 
     /**
@@ -22,10 +27,6 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -36,6 +37,12 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate(['content'=>'required']);
+        $post=Auth::user()->Posts()->create(['content'=>$request->content]);
+        if($request->has('post_image')){
+            $post->image_path=$request->post_image;
+        }
+        return response()->json($post);
     }
 
     /**
@@ -47,6 +54,7 @@ class PostController extends Controller
     public function show(Post $post)
     {
         //
+        return response()->json($post);
     }
 
     /**
@@ -55,10 +63,6 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit(Post $post)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -70,6 +74,12 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         //
+        $request->validate(['content'=>'required']);
+        $post->content=$request->content;
+        if($request->has('post_image')){
+            $post->image_path=$request->post_image;
+        }
+        return response()->json($post);
     }
 
     /**
@@ -81,5 +91,7 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         //
+        $post->delete();
+        return response()->json(['sucess'=>'post deleted']);
     }
 }
