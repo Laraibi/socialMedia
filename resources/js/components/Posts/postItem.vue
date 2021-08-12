@@ -27,18 +27,23 @@
       :preview-src-list="[postImage]"
     >
     </el-image>
-    <!-- <img v-if="postImage" :src="postImage" class="image" /> -->
     <div style="padding: 14px">
       <span>{{ PostItem.content }}</span>
       <div class="bottom mt-2">
         <el-badge :value="likesCount" class="mx-2">
-          <el-button type="info" icon="el-icon-heart-empty" plain
+          <el-button
+            @click="like"
+            :type="isLiked ? 'success':'info'"
+            icon="el-icon-heart-empty"
+            
             >J'aime</el-button
           >
         </el-badge>
 
         <el-badge :value="commentsCount" class="mx-2">
-          <el-button type="info" icon="el-icon-s-comment" plain>Commenter</el-button>
+          <el-button type="info" icon="el-icon-s-comment" 
+            >Commenter</el-button
+          >
         </el-badge>
       </div>
     </div>
@@ -54,6 +59,21 @@ export default {
       type: Object,
       value: {},
     },
+    isLiked: {
+      type: Boolean,
+      value: false,
+    },
+  },
+  methods: {
+    like() {
+        this.$emit("likePost", this.PostItem.id);
+
+      // if (this.isLiked) {
+      //   this.$emit("unlikePost", this.PostItem.id);
+      // } else {
+        //   this.$emit("likePost", this.PostItem.id);
+      // }
+    },
   },
   computed: {
     likesCount() {
@@ -62,7 +82,6 @@ export default {
     commentsCount() {
       return 10;
     },
-
     userImage() {
       if (
         this.PostItem.user.image_path &&

@@ -19,7 +19,7 @@ class PostResource extends JsonResource
             'id'=>$this->id,
             'content'=>$this->content,
             // 'image_path'=>$this->image_path? public_path().'storage\\posts_images\\'.$this->image_path:'',
-            'image_path'=>$this->image_path?Storage::url('posts_images//'.$this->image_path):'',
+            'image_path'=>$this->image_path?Storage::url('post_images//'.$this->image_path):'',
             'user'=>$this->User,
             'timeStamp'=>array('created'=>$this->created_at,'updated'=>$this->updated_at),
         ];

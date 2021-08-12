@@ -37,11 +37,17 @@ class PostController extends Controller
     {
         //
         $request->validate(['content'=>'required']);
+        // return array('Request has [post_image]'=>$request->has('post_image'));
         $post=Auth::user()->Posts()->create(['content'=>$request->content]);
         if($request->has('post_image')){
-            $post->image_path=$request->post_image;
+            // $post->image_path=$request->post_image->split('/')[];
+            $urlArray=explode('/', $request->post_image);
+            $post->image_path=array_pop($urlArray);
+            $post->save();
         }
-        return response()->json($post);
+        // return response()->json($post);
+        return new PostResource($post);
+
     }
 
     /**

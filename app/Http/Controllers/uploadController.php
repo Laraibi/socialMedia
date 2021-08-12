@@ -9,9 +9,10 @@ class uploadController extends Controller
 {
     //
     public function uploadImage(Request $request){
-        $img = $request->file('user_image');
-        $fileName="user_image_".Auth::user()->id.'_'.time().'.'.$img->getClientOriginalExtension();
-        $path=$img->storeAs('public/user_images',$fileName);
+        $imageType= $request->hasFile('post_image') ?'post_image' : 'user_image';
+        $img = $request->file($imageType);
+        $fileName=$imageType."_".Auth::user()->id.'_'.time().'.'.$img->getClientOriginalExtension();
+        $path=$img->storeAs('public/'.$imageType.'s',$fileName);
         return response()->json(['image_path'=>asset($path)]);
     }
 }
