@@ -22,6 +22,10 @@ class CreateMessagesTable extends Migration
             $table->foreign('receiver_id')->references('id')->on('users');
             $table->timestamps();
         });
+        Schema::table('messages', function (Blueprint $table) {
+            $table->foreign('sender_id')->references('id')->on('users');
+            $table->foreign('receiver_id')->references('id')->on('users');
+        });
     }
 
     /**
