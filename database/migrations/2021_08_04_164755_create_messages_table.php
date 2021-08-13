@@ -19,13 +19,11 @@ class CreateMessagesTable extends Migration
             $table->integer('sender_id')->unsigned();
             $table->integer('receiver_id')->unsigned();
             $table->text('body');
-            // $table->foreign('sender_id')->references('id')->on('users');
-            // $table->foreign('receiver_id')->references('id')->on('users');
             $table->timestamps();
         });
         Schema::table('messages', function (Blueprint $table) {
-            $table->foreign('sender_id')->references('id')->on('users');
-            $table->foreign('receiver_id')->references('id')->on('users');
+            $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');;
+            $table->foreign('receiver_id')->references('id')->on('users')->onDelete('cascade');;
         });
     }
 
