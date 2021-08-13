@@ -9,6 +9,7 @@ use App\Models\User;
 class like extends Model
 {
     use HasFactory;
+    protected $fillable=['user_id','post_id'];
     public function Post(){
         return $this->belongsTo(Post::class);
     }

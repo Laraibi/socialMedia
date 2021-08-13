@@ -9,8 +9,6 @@
             style="height: 3rem; width: 3rem; border-radius: 50%"
             alt=""
           />
-          <!-- </div>
-        <div class="col"> -->
           <span class="text-bold display-5 mx-2">{{ PostItem.user.name }}</span>
           <time class="time ms-auto me-2">
             <small
@@ -27,23 +25,30 @@
       :preview-src-list="[postImage]"
     >
     </el-image>
-    <div style="padding: 14px">
+    <div style="padding: 26px">
       <span>{{ PostItem.content }}</span>
-      <div class="bottom mt-2">
-        <el-badge :value="likesCount" class="mx-2">
+      <div class="bottom mt-3">
+        <el-badge :value="PostItem.likeCount" class="mx-2">
           <el-button
             @click="like"
-            :type="isLiked ? 'success':'info'"
+            :type="PostItem.isLiked ? 'success' : 'info'"
             icon="el-icon-heart-empty"
-            
+            size="mini"
+            round
             >J'aime</el-button
           >
         </el-badge>
 
-        <el-badge :value="commentsCount" class="mx-2">
-          <el-button type="info" icon="el-icon-s-comment" 
+        <el-badge :value="PostItem.commentsCount" class="mx-2">
+          <el-button
+            type="info"
+            icon="el-icon-s-comment"
+            size="mini"
+            round
+            @click="toggleComment"
             >Commenter</el-button
           >
+          <comment :commentDialogVisile="Dialogcomment" :postItem="PostItem" @toggleComment="toggleComment" @incrementComments="PostItem.commentsCount++"></comment>
         </el-badge>
       </div>
     </div>
@@ -52,37 +57,38 @@
 
 <script>
 import moment from "moment";
+import axios from "axios";
+import Comment from "./Comment.vue";
 export default {
   name: "postItem",
+  components: {
+    Comment,
+  },
+  data() {
+    return {
+      Dialogcomment: false,
+    };
+  },
   props: {
     PostItem: {
       type: Object,
       value: {},
     },
-    isLiked: {
-      type: Boolean,
-      value: false,
-    },
   },
   methods: {
     like() {
-        this.$emit("likePost", this.PostItem.id);
-
-      // if (this.isLiked) {
-      //   this.$emit("unlikePost", this.PostItem.id);
-      // } else {
-        //   this.$emit("likePost", this.PostItem.id);
-      // }
+      // this.$emit("likePost", this.PostItem.id);
+      axios.post("api/like", { post_id: this.PostItem.id }).then((res) => {
+        this.PostItem.isLiked = res.data.isLiked;
+        this.PostItem.likeCount += res.data.isLiked ? 1 : -1;
+      });
+    },
+    toggleComment() {      
+      this.Dialogcomment = !this.Dialogcomment;
     },
   },
   computed: {
-    likesCount() {
-      return 18;
-    },
-    commentsCount() {
-      return 10;
-    },
-    userImage() {
+     userImage() {
       if (
         this.PostItem.user.image_path &&
         this.PostItem.user.image_path !== ""

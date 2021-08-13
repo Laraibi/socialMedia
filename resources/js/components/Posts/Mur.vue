@@ -1,5 +1,5 @@
 <template>
-  <el-row type="flex" class="row-bg" justify="center">
+  <el-row type="flex" class="row-bg page-component__scroll" justify="center">
     <el-col :lg="16" :sm="24">
       <add-post @pushPost="pushPost"> </add-post> </el-col
   ></el-row>
@@ -10,10 +10,9 @@
         v-for="(post, key) in Posts"
         :key="key"
         :PostItem="post"
-        :isLiked="likedPosts.includes(post.id)"
-        @likePost="likePost"
       ></post-item> </el-col
   ></el-row>
+
 </template>
 
 <script>
@@ -30,7 +29,6 @@ export default {
   data() {
     return {
       Posts: [],
-      likedPosts: [12, 14, 5, 16],
     };
   },
   methods: {
@@ -39,20 +37,6 @@ export default {
     },
     pushPost(post) {
       this.Posts.unshift(post);
-    },
-    likePost(postId) {
-      if (this.likedPosts.includes(postId)) {
-        this.likedPosts.splice(this.likedPosts.indexOf(postId),1);
-      } else {
-        this.likedPosts.push(postId);
-      }
-    },
-    unlikePost(postId) {
-      console.log(postId);
-      // console.log(this.likedPosts.indexOf(postId))
-      this.likedPosts.splice(this.likedPosts.indexOf(postId));
-      // console.log('this.likedPosts:')
-      // console.log(this.likedPosts)
     },
   },
   created() {
