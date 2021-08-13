@@ -18,8 +18,8 @@ class CreateMessagesTable extends Migration
             $table->integer('sender_id');
             $table->integer('receiver_id');
             $table->text('body');
-            $table->foreign('sender_id')->references('id')->on('users');
-            $table->foreign('receiver_id')->references('id')->on('users');
+            // $table->foreign('sender_id')->references('id')->on('users');
+            // $table->foreign('receiver_id')->references('id')->on('users');
             $table->timestamps();
         });
         Schema::table('messages', function (Blueprint $table) {
