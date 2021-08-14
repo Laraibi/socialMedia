@@ -121,7 +121,5 @@ export default {
 </script>
 
 <style>
-.image {
-  height: 200px;
-}
+
 </style>
