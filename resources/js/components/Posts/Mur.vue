@@ -41,12 +41,12 @@ export default {
   created() {
     this.loadPosts();
   },
-  beforeRouteEnter(to, from, next) {
-    if (!window.Laravel.isLoggedin) {
-      window.location.href = "/";
-    }
-    next();
-  },
+  // beforeRouteEnter(to, from, next) {
+  //   if (!window.Laravel.isLoggedin) {
+  //     window.location.href = "/";
+  //   }
+  //   next();
+  // },
 };
 </script>
 

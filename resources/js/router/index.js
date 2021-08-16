@@ -28,10 +28,6 @@ const routes = [
             if (!window.Laravel.isLoggedin) {
                 window.location.href = "/";
             }
-            // next(vm=>{
-            //     // vm.logged=true
-            //     console.log(vm)
-            // });
             next();
         },
     },
@@ -61,6 +57,7 @@ const routes = [
         path: "/Mur",
         component: Mur,
         beforeEnter(to, from, next) {
+            console.log(window.Laravel.isLoggedin);
             if (!window.Laravel.isLoggedin) {
                 window.location.href = "/";
             }
