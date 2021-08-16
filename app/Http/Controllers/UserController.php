@@ -63,6 +63,7 @@ class UserController extends Controller
             'success' => $success,
             'message' => $message,
             // 'check' => Auth::check()
+            // 'guard' => auth()->guard()->getName()
         ];
         return response()->json($response);
     }
