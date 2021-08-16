@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <div class="row" >
     <div class="col-2">
       <ul class="p-0 m-0" v-if="userMessages.length > 0">
         <li class="nav-item">
@@ -69,14 +69,14 @@ export default {
       let arr = [];
       this.userMessages.forEach((item) => {
         if (
-          arr.every((user) => user.id !== item.receiver_id) &&
-          item.receiver_id !== window.Laravel.user.id
+          arr.every((user) => user.id != item.receiver_id) &&
+          item.receiver_id != window.Laravel.user.id
         ) {
           arr.push(item.receiver);
         }
         if (
-          arr.every((user) => user.id !== item.sender_id) &&
-          item.sender_id !== window.Laravel.user.id
+          arr.every((user) => user.id != item.sender_id) &&
+          item.sender_id != window.Laravel.user.id
         ) {
           arr.push(item.sender);
         }
@@ -85,7 +85,7 @@ export default {
     },
   },
   created() {
-    console.log(this.$router.getRoutes());
+    // console.log(this.$router.getRoutes());
     this.loadMessages();
     this.loadRegistredUsers();
   },
@@ -117,6 +117,12 @@ export default {
       });
       this.newDisscussionSelectedUsers = [];
     },
+  },
+  beforeRouteEnter(to, from, next) {
+    if (!window.Laravel.isLoggedin) {
+      window.location.href = "/";
+    }
+    next();
   },
 };
 </script>

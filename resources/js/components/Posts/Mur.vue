@@ -12,7 +12,6 @@
         :PostItem="post"
       ></post-item> </el-col
   ></el-row>
-
 </template>
 
 <script>
@@ -41,6 +40,12 @@ export default {
   },
   created() {
     this.loadPosts();
+  },
+  beforeRouteEnter(to, from, next) {
+    if (!window.Laravel.isLoggedin) {
+      window.location.href = "/";
+    }
+    next();
   },
 };
 </script>

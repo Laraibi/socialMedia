@@ -39,7 +39,7 @@ export default {
           })
           .then((res) => {
             this.messageBody=''
-            console.log(res.data);
+            // console.log(res.data);
             this.$emit('reLoad');
           });
       }

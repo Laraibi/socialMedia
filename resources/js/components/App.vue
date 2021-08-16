@@ -70,9 +70,7 @@ export default {
           .then((response) => {
             if (response.data.success) {
               window.location.href = "/";
-            } else {
-              console.log(response);
-            }
+            } 
           })
           .catch(function (error) {
             console.error(error);

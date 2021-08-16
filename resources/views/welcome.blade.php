@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <!-- {{dd(auth()->guard()->getName())}} -->
+
     @if (Auth::check())
         @php
             $user_auth_data = [

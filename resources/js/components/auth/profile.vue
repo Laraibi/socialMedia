@@ -71,9 +71,9 @@ export default {
   },
   methods: {
     load() {
-      console.log('load')
+      // console.log("load");
       // this.user = window.Laravel.user;
-      this.user =  _.cloneDeep(window.Laravel.user);
+      this.user = _.cloneDeep(window.Laravel.user);
       this.user.isMale = this.user.isMale.toString();
       if (this.user.image_path !== null && this.user.image_path !== "") {
         this.imageUrl =
@@ -114,6 +114,12 @@ export default {
         });
       });
     },
+  },
+  beforeRouteEnter(to, from, next) {
+    if (!window.Laravel.isLoggedin) {
+      window.location.href = "/";
+    }
+    next();
   },
 };
 </script>
