@@ -49,4 +49,7 @@ export default {
 </script>
 
 <style>
+textarea {
+  resize: none !important;
+}
 </style>
