@@ -1,7 +1,7 @@
 <template>
   <!-- {{ user }} -->
   <el-row type="flex" class="row-bg" justify="center">
-    <el-col :span="16">
+    <el-col :lg="16" :sm="24">
       <el-form ref="user" :model="user" label-width="10rem">
         <el-form-item label="Email">
           <el-input v-model="user.email" :disabled="true"></el-input>

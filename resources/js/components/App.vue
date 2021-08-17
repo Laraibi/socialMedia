@@ -34,8 +34,10 @@
       </div>
     </div>
   </nav>
-  <div class="row container">
-    <router-view></router-view>
+  <div class="row">
+    <div class="container-lg container-fluid-sm">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -70,7 +72,7 @@ export default {
           .then((response) => {
             if (response.data.success) {
               window.location.href = "/";
-            } 
+            }
           })
           .catch(function (error) {
             console.error(error);
