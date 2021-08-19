@@ -1,6 +1,6 @@
 <template>
-  <div class="row"  >
-      <div class="col-9">
+  <div class="row m-2"   >
+      <div class="col--md-9 col-sm-12">
         <el-input
           type="textarea"
           :rows="2"
@@ -10,7 +10,7 @@
         >
         </el-input>
       </div>
-      <div class="col-3">
+      <div class="col-md-3 col-sm-12">
         <el-button type="success" class="h-100 w-100 " @click="send">Envoyer<i class="el-icon-upload2 el-icon-right"></i></el-button>
       </div>
   </div>

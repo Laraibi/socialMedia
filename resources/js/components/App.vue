@@ -1,39 +1,32 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3 sticky-top">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav" v-if="isLoggedIn">
-          <router-link to="/home" class="nav-item nav-link">Home</router-link>
-          <router-link to="/profile" class="nav-link">Profile</router-link>
-          <router-link to="/Messagerie" class="nav-link"
-            >Messagerie</router-link
-          >
-          <router-link to="/Mur" class="nav-link">Mur</router-link>
-          <a class="nav-item nav-link" style="cursor: pointer" @click="logout"
-            >Logout</a
-          >
-        </div>
-        <div class="navbar-nav" v-else>
-          <router-link to="/" class="nav-item nav-link">login</router-link>
-          <router-link to="/register" class="nav-item nav-link"
-            >Register</router-link
-          >
-        </div>
-      </div>
-    </div>
-  </nav>
+  <el-menu
+    :router="true"
+    :default-active="'/home'"
+    v-if="isLoggedIn"
+    class="el-menu-demo mb-3 sticky-top"
+    mode="horizontal"
+    background-color="#545c64"
+    text-color="#fff"
+    active-text-color="#ffd04b"
+  >
+    <el-menu-item index="/home"> Home </el-menu-item>
+    <el-menu-item index="/profile">Profile</el-menu-item>
+    <el-menu-item index="/Messagerie"> Messagerie </el-menu-item>
+    <el-menu-item @click="logout" index="">Logout</el-menu-item>
+  </el-menu>
+  <el-menu
+    :router="true"
+    v-else
+    :default-active="'/'"
+    class="el-menu-demo mb-3 sticky-top"
+    mode="horizontal"
+    background-color="#545c64"
+    text-color="#fff"
+    active-text-color="#ffd04b"
+  >
+    <el-menu-item index="/">Login</el-menu-item>
+    <el-menu-item index="/register"> Register</el-menu-item>
+  </el-menu>
   <div class="row">
     <div class="container-lg container-fluid-sm">
       <router-view></router-view>
@@ -65,7 +58,7 @@ export default {
   },
   methods: {
     logout(e) {
-      e.preventDefault();
+      // e.preventDefault();
       axios.get("/sanctum/csrf-cookie").then((response) => {
         axios
           .post("/api/logout")
@@ -84,4 +77,12 @@ export default {
 </script>
 
 <style>
+.el-menu-demo {
+  position: sticky !important;
+}
+.el-form-item__label{
+  font-size: 14px !important;
+  font-weight: bold;
+  text-decoration: underline;
+}
 </style>

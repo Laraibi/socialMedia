@@ -2,7 +2,7 @@ import { createWebHistory, createRouter } from "vue-router";
 import discussion from "../components/Messages/discussion.vue";
 import noDiscussion from "../components/Messages/noDiscussion.vue";
 import Messagerie from "../components/Messages/Messagerie.vue";
-import home from "../components/auth/home.vue";
+// import home from "../components/auth/home.vue";
 import login from "../components/auth/login.vue";
 import register from "../components/auth/register.vue";
 import profile from "../components/auth/profile.vue";
@@ -34,7 +34,14 @@ const routes = [
     {
         name: "home",
         path: "/home",
-        component: home,
+        component: Mur,
+        beforeEnter(to, from, next) {
+            console.log(window.Laravel.isLoggedin);
+            if (!window.Laravel.isLoggedin) {
+                window.location.href = "/";
+            }
+            next();
+        },
     },
     {
         name: "login",
@@ -52,18 +59,18 @@ const routes = [
             next();
         },
     },
-    {
-        name: "Mur",
-        path: "/Mur",
-        component: Mur,
-        beforeEnter(to, from, next) {
-            console.log(window.Laravel.isLoggedin);
-            if (!window.Laravel.isLoggedin) {
-                window.location.href = "/";
-            }
-            next();
-        },
-    },
+    // {
+    //     name: "Mur",
+    //     path: "/Mur",
+    //     component: Mur,
+    //     beforeEnter(to, from, next) {
+    //         console.log(window.Laravel.isLoggedin);
+    //         if (!window.Laravel.isLoggedin) {
+    //             window.location.href = "/";
+    //         }
+    //         next();
+    //     },
+    // },
     {
         name: "register",
         path: "/register",

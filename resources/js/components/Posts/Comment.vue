@@ -3,21 +3,23 @@
     title="Commentaires"
     v-model="commentDialogVisile"
     :before-close="toggleComment"
+    :width	="screenWidth<1048 ? '100%' :'50%'"
   >
     <div class="row">
-      <div class="col-8">
-        <textarea class="form-control" v-model="newComment.content"></textarea>
+      <div class="col-md-8 col-sm-12">
+        <textarea placeholder="Votre Commentaire" class="form-control" v-model="newComment.content"></textarea>
       </div>
-      <div class="col-4">
-        <button class="btn btn-success" @click="addComment">Commenter</button>
+      <div class="col-md-4 col-sm-12">
+        <button class="btn btn-success w-100 h-100" @click="addComment">Commenter</button>
       </div>
     </div>
     <div class="row">
       <ul>
         <li class="" v-for="(comment, key) in Commentaires" :key="key">
           <div class="row commentRow">
-            <div class="col-2 align-middle">
+            <div class="col-2 align-middle justify-content-center">
               <!-- {{ comment.user.name }} -->
+              <span class="d-block">{{ comment.user.name }}</span>
 
               <img
                 class="userImg image image-fluid "
@@ -69,9 +71,9 @@ export default {
     },
   },
   computed: {
-    created() {
-      return "";
-    },
+    screenWidth(){
+      return window.innerWidth;
+    }
   },
   methods: {
     userImgUrl(base_path) {
@@ -109,9 +111,11 @@ export default {
 
 <style>
 .commentRow{
-  color:honeydew;padding: 10px;
+  /* color:honeydew; */
+  padding: 10px;
   /* border: 1px gray solid ; */
-  background-color: gray;
+  /* background-color: gray; */
+  background-color: #D5ECC2;
   opacity: 0.7;
   border-radius: 5px;
   margin: 5px 2px;

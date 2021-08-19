@@ -1,5 +1,8 @@
 <template>
   <div class="row">
+    <div class="col-lg-4 col-sm-12">
+      <user-card :id="id"></user-card>
+    </div>
     <div class="col-lg-8 col-sm-12">
       <sent-message :receiverId="id" @reLoad="load"></sent-message>
       <el-timeline id="disscussion" class="my-2" v-loading="loading">
@@ -9,9 +12,6 @@
           :id="msg.id"
         ></message>
       </el-timeline>
-    </div>
-    <div class="col-lg-4 col-sm-12">
-      <user-card :id="id"></user-card>
     </div>
   </div>
 </template>
