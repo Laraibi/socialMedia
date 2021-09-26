@@ -4,7 +4,7 @@
       <user-card :id="id"></user-card>
     </div>
     <div class="col-lg-8 col-sm-12">
-      <sent-message :receiverId="id" @reLoad="load"></sent-message>
+      <sent-message :receiverId="id" @pushMsg="addMessageInFront"></sent-message>
       <el-timeline id="disscussion" class="my-2" v-loading="loading">
         <message
           v-for="(msg, key) in Messages"
@@ -56,6 +56,9 @@ export default {
         });
       }
     },
+    addMessageInFront(msg){
+      this.Messages.unshift(msg);
+    }
   },
   created() {
     this.load();
