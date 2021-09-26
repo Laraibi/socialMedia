@@ -131,7 +131,6 @@ class PostController extends Controller
         $request->validate(['post_id' => 'required', 'content' => 'required']);
         $post = Post::find($request->post_id);
         if ($post) {
-            //    return CommentRessource::collection($post->comments);
             $comment = $post->comments()->create(['user_id' => Auth::id(), 'content' => $request->content]);
             return new CommentRessource($comment);
         } else {

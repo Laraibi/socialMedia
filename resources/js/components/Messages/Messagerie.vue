@@ -1,5 +1,5 @@
 <template>
-  <div class="row" >
+  <div class="row">
     <div class="col-lg-2 col-sm-12">
       <ul class="p-0 m-0" v-if="userMessages.length > 0">
         <li class="nav-item">
@@ -85,11 +85,27 @@ export default {
     },
   },
   created() {
-    // console.log(this.$router.getRoutes());
+    this.subscribeNewMessages();
     this.loadMessages();
     this.loadRegistredUsers();
   },
   methods: {
+    subscribeNewMessages() {
+      Echo.private("newMessage." + window.Laravel.user.id).listen(
+        "newMessage",
+        (e) => {
+          console.log(e);
+
+          this.$notify({
+            title: "Success",
+            message: "New Message from " + e.Message.sender_id,
+            type: "success",
+            showClose: false,
+          });
+ 
+        }
+      );
+    },
     loadMessages() {
       axios.get("/api/messages").then((res) => (this.userMessages = res.data));
     },

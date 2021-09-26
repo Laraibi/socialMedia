@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\newMessage;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -53,6 +54,7 @@ class MessageController extends Controller
         $request->validate(['receiver_id' => 'required', 'body' => 'required']);
         $user = Auth::user();
         $msg = $user->sendedMessages()->create(['receiver_id' => $request->receiver_id, 'body' => $request->body]);
+        newMessage::dispatch($msg);
         return response()->json($msg);
     }
 

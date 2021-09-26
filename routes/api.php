@@ -42,6 +42,5 @@ route::post('uploadImage',[uploadController::class,'uploadImage']);
 route::resource('posts',PostController::class);
 
 route::post('like',[PostController::class,'like']);
-// route::post('unlike',[PostController::class,'unlike']);
 route::get('postComments',[PostController::class,'getPostComments']);
 route::post('addComment',[PostController::class,'addPostComment']);
