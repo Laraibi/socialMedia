@@ -85,27 +85,12 @@ export default {
     },
   },
   created() {
-    this.subscribeNewMessages();
+    // this.subscribeNewMessages();
     this.loadMessages();
     this.loadRegistredUsers();
   },
   methods: {
-    subscribeNewMessages() {
-      Echo.private("newMessage." + window.Laravel.user.id).listen(
-        "newMessage",
-        (e) => {
-          console.log(e);
 
-          this.$notify({
-            title: "Success",
-            message: "New Message from " + e.Message.sender_id,
-            type: "success",
-            showClose: false,
-          });
- 
-        }
-      );
-    },
     loadMessages() {
       axios.get("/api/messages").then((res) => (this.userMessages = res.data));
     },

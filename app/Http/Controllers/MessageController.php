@@ -7,6 +7,7 @@ use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
+
 class MessageController extends Controller
 {
     /**
@@ -20,13 +21,13 @@ class MessageController extends Controller
         $user = Auth::user();
         $response = [];
         foreach ($user->Messages() as $Message) {
-            array_push($response,array(
+            array_push($response, array(
                 'id' => $Message->id,
                 'receiver_id' => $Message->receiver_id,
-                'sender_id'=>$Message->sender_id,
-                'body'=>$Message->body,
-                'receiver'=>$Message->receiver,
-                'sender'=>$Message->sender
+                'sender_id' => $Message->sender_id,
+                'body' => $Message->body,
+                'receiver' => $Message->receiver,
+                'sender' => $Message->sender
             ));
         }
         return response()->json($response);
@@ -38,7 +39,7 @@ class MessageController extends Controller
         $Message = Message::find($request->id);
         if ($Message) {
             return response()->json(array(
-                'senderId'=>$Message->sender->id,
+                'senderId' => $Message->sender->id,
                 'senderName' => $Message->sender->name,
                 'receiverName' => $Message->receiver->name,
                 'sender' => $Message->sender,
@@ -53,13 +54,17 @@ class MessageController extends Controller
     {
         $request->validate(['receiver_id' => 'required', 'body' => 'required']);
         $user = Auth::user();
-        $msg = $user->sendedMessages()->create(['receiver_id' => $request->receiver_id, 'body' => $request->body]);
+        $msg = $user->sendedMessages()
+            ->create(['receiver_id' => $request->receiver_id, 'body' => $request->body]);
+            $msg->load('receiver');
+            $msg->load('sender');
         newMessage::dispatch($msg);
         return response()->json($msg);
-    }
+    }       
 
-    public function getDisscussion(Request $request){
-        $request->validate(['withUserId'=>'required']);
+    public function getDisscussion(Request $request)
+    {
+        $request->validate(['withUserId' => 'required']);
         $user = Auth::user();
         return response()->json($user->discussion($request->withUserId));
     }

@@ -39,7 +39,6 @@ import axios from "axios";
 export default {
   data() {
     return {
-      Message: "Books Management",
       isLoggedIn: false,
       transitionName: "",
     };
@@ -47,6 +46,7 @@ export default {
   created() {
     if (window.Laravel.isLoggedin) {
       this.isLoggedIn = true;
+      this.subscribeNewMessages();
     }
   },
   methods: {
@@ -65,6 +65,20 @@ export default {
           });
       });
     },
+    subscribeNewMessages() {
+      Echo.private("newMessage." + window.Laravel.user.id).listen(
+        "newMessage",
+        (e) => {          
+          this.$notify({
+            title: "Success",
+            message: "New Message from " + e.Message.sender.name,
+            type: "success",
+            showClose: false,
+          });
+          state.newMessages.push(e.Message);
+        }
+      );
+    },
   },
 };
 </script>
@@ -73,7 +87,7 @@ export default {
 .el-menu-demo {
   position: sticky !important;
 }
-.el-form-item__label{
+.el-form-item__label {
   font-size: 14px !important;
   font-weight: bold;
   text-decoration: underline;

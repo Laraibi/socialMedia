@@ -3,11 +3,9 @@
     :timestamp="Message.date"
     placement="top"
     size="large"
-    v-loading="loading"
-    element-loading-text="Chargement..."
   >
     <template v-slot:dot>
-      <el-avatar :src="senderImageUrl" ></el-avatar>
+      <el-avatar :src="senderImageUrl"></el-avatar>
     </template>
     <el-card
       :class="senderName == 'you' ? 'bg-success' : 'bg-info'"
@@ -21,27 +19,23 @@
   </el-timeline-item>
 </template>
 <script>
-import axios from "axios";
 let moment = require("moment");
 export default {
   name: "message",
   props: {
-    id: {
-      type: Number,
-      value: -1,
+    Message: {
+      type: Object,
+      required: true,
     },
   },
   data() {
-    return {
-      Message: {},
-      loading: true,
-    };
+    return {};
   },
   computed: {
     senderName() {
-      return this.Message.senderId == window.Laravel.user.id
+      return this.Message.sender.id == window.Laravel.user.id
         ? "you"
-        : this.Message.senderName;
+        : this.Message.sender.name;
     },
     senderImageUrl() {
       // console.log(this);
@@ -61,27 +55,6 @@ export default {
       }
     },
   },
-  methods: {
-    load() {
-      if (this.id !== -1) {
-        axios.get("/api/messageDetails?id=" + this.id).then((res) => {
-          this.Message = res.data;
-          this.Message.date = moment(this.Message.date).format(
-            "YYYY-MM-DD HH:mm:ss"
-          );
-          this.loading = false;
-        });
-      }
-    },
-  },
-  watch: {
-    id() {
-      this.load();
-    },
-  },
-  created() {
-    this.load();
-  },
 };
 </script>
 
@@ -97,12 +70,12 @@ export default {
   background-color: #909399 !important;
   color: #dcdfe6;
 }
-.el-timeline-item__dot{
-  top:-0.8rem;
-  left:-0.8rem;
+.el-timeline-item__dot {
+  top: -0.8rem;
+  left: -0.8rem;
   z-index: 10000 !important;
 }
-.el-timeline-item__timestamp{
-    margin-left: 0.8rem !important;
+.el-timeline-item__timestamp {
+  margin-left: 0.8rem !important;
 }
 </style>

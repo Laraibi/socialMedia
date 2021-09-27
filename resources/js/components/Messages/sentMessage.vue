@@ -1,18 +1,21 @@
 <template>
-  <div class="row m-2"   >
-      <div class="col--md-9 col-sm-12">
-        <el-input
-          type="textarea"
-          :rows="2"
-          placeholder="Nouveau Messaget"
-          v-model="messageBody"
-          @keyup.enter="send"
-        >
-        </el-input>
-      </div>
-      <div class="col-md-3 col-sm-12">
-        <el-button type="success" class="h-100 w-100 " @click="send">Envoyer<i class="el-icon-upload2 el-icon-right"></i></el-button>
-      </div>
+  <div class="row m-2">
+    <div class="col-md-9 col-sm-12">
+      <el-input
+        class="h-100"
+        type="textarea"
+        :rows="2"
+        placeholder="Nouveau Messaget"
+        v-model="messageBody"
+        @keyup.enter="send"
+      >
+      </el-input>
+    </div>
+    <div class="col-md-3 col-sm-12">
+      <el-button type="success" class="h-100 w-100" @click="send"
+        >Envoyer<i class="el-icon-upload2 el-icon-right"></i
+      ></el-button>
+    </div>
   </div>
 </template>
 
@@ -38,8 +41,8 @@ export default {
             body: this.messageBody,
           })
           .then((res) => {
-            this.messageBody=''
-            this.$emit('pushMsg',res.data);
+            this.messageBody = "";
+            this.$emit("pushMsg", res.data);
           });
       }
     },

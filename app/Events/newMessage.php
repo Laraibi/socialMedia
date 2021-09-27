@@ -20,8 +20,8 @@ class newMessage implements ShouldBroadcast
      *
      * @return void
      */
-    public Message $Message;
-    public function __construct(Message $Message)
+    public  $Message;
+    public function __construct( $Message)
     {
         //
         $this->Message=$Message;

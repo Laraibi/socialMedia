@@ -61,15 +61,18 @@ class User extends Authenticatable
     }
     public function discussion(int $withUserId)
     {
-        return Message::whereIn('receiver_id', [$withUserId, $this->id])->WhereIn('sender_id', [$withUserId, $this->id])->orderBy('created_at', 'desc')->get();
+        return Message::whereIn('receiver_id', [$withUserId, $this->id])->WhereIn('sender_id', [$withUserId, $this->id])->orderBy('created_at', 'desc')->with('sender', 'receiver')->get();
     }
-    public function Posts(){
+    public function Posts()
+    {
         return $this->hasMany(Post::class);
     }
-    public function Likes(){
+    public function Likes()
+    {
         return $this->hasMany(like::class);
     }
-    public function comments(){
+    public function comments()
+    {
         return $this->hasMany(comment::class);
     }
 }

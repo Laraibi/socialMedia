@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <div class="col-lg-4 col-sm-12">
-      <user-card :id="id"></user-card>
+      <user-card :id="id" ></user-card>
     </div>
     <div class="col-lg-8 col-sm-12">
       <sent-message :receiverId="id" @pushMsg="addMessageInFront"></sent-message>
@@ -9,7 +9,7 @@
         <message
           v-for="(msg, key) in Messages"
           :key="key"
-          :id="msg.id"
+          :Message="msg"
         ></message>
       </el-timeline>
     </div>
@@ -36,6 +36,7 @@ export default {
   },
   data() {
     return {
+      newMessagesFromEcho:state.newMessages,
       Messages: [],
       loading: true,
     };
@@ -44,6 +45,9 @@ export default {
     id() {
       this.load();
     },
+    newMessagesFromEcho(newVal, oldVal){
+      console.log(newVal[oldVal.length]);
+    }
   },
   methods: {
     load() {

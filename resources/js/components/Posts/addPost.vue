@@ -1,9 +1,8 @@
 <template>
   <el-row type="flex" :gutter="20" class="row-bg" justify="center">
-    <el-col :span="12">
+    <el-col :span="12" class="h-100">
       <el-input
         type="textarea"
-        :rows="2"
         placeholder="Say Somthing"
         v-model="Post.content"
         @keyup.enter="sendPost"
@@ -12,7 +11,7 @@
     </el-col>
     <el-col :span="6">
       <el-upload
-       ref="upload"
+        ref="upload"
         id="upladPostImage"
         multiple="false"
         action="/api/uploadImage"
@@ -47,7 +46,7 @@ export default {
   name: "addPost",
   data() {
     return {
-      upladObject:[],
+      upladObject: [],
       Post: {
         content: "",
         post_image: "",
@@ -67,14 +66,12 @@ export default {
   },
   methods: {
     sendPost() {
-      axios
-        .post("/api/posts", { ...this.Post })
-        .then((res) => {
-          this.$emit("pushPost", res.data.data)
-          this.Post.content=''
-          this.Post.post_image=''
-          this.$refs.upload.clearFiles()
-          });
+      axios.post("/api/posts", { ...this.Post }).then((res) => {
+        this.$emit("pushPost", res.data.data);
+        this.Post.content = "";
+        this.Post.post_image = "";
+        this.$refs.upload.clearFiles();
+      });
     },
     handlePictureCardPreview() {
       this.dialogVisible = true;
@@ -84,15 +81,16 @@ export default {
         .replace("\\", "")
         .replace("public", "storage");
     },
-    handlaRemomeImage(){
-      this.Post.post_image=''
-    }
+    handlaRemomeImage() {
+      this.Post.post_image = "";
+    },
   },
 };
 </script>
 
 <style>
-#upladPostImage div,#upladPostImage div button {
+#upladPostImage div,
+#upladPostImage div button {
   width: 100% !important;
 }
 </style>

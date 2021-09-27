@@ -23,9 +23,9 @@ window.axios.defaults.headers.common.crossDomain = true;
  */
 
 import Echo from 'laravel-echo';
-
+import state from './state.js'
 window.Pusher = require('pusher-js');
-
+window.state=state
 window.Echo = new Echo({
     broadcaster: 'pusher',
     key: process.env.MIX_PUSHER_APP_KEY,
