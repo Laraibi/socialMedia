@@ -1,6 +1,6 @@
 <template>
   <el-timeline-item
-    :timestamp="Message.date"
+    :timestamp="sendedAt"
     placement="top"
     size="large"
   >
@@ -32,6 +32,9 @@ export default {
     return {};
   },
   computed: {
+    sendedAt(){
+      return moment(this.Message.created_at).format('Y-M-D HH:mm')
+    },
     senderName() {
       return this.Message.sender.id == window.Laravel.user.id
         ? "you"

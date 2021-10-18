@@ -1,9 +1,9 @@
 <template>
   <div class="row">
-    <div class="col-lg-4 col-sm-12">
+    <div class="col-lg-6 col-sm-12">
       <user-card :id="id" ></user-card>
     </div>
-    <div class="col-lg-8 col-sm-12">
+    <div class="col-lg-6 col-sm-12">
       <sent-message :receiverId="id" @pushMsg="addMessageInFront"></sent-message>
       <el-timeline id="disscussion" class="my-2" v-loading="loading">
         <message
@@ -36,16 +36,21 @@ export default {
   },
   data() {
     return {
-      newMessagesFromEcho:state.newMessages,
       Messages: [],
       loading: true,
     };
+  },
+  computed:{
+    newMessagesFromEcho(){
+      return state.newMessages
+    }
   },
   watch: {
     id() {
       this.load();
     },
     newMessagesFromEcho(newVal, oldVal){
+      console.log('wtach triged')
       console.log(newVal[oldVal.length]);
     }
   },

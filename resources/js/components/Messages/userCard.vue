@@ -5,37 +5,39 @@
     </div>
     <div class="card-body">
       <div class="my-2 row justify-content-center">
-        <div class="col-6">
+        <div class="col-4 justify-content-center">
           <img
             :src="userImg"
             alt=""
             id="cardUserImage"
-            class="image rounded img-fluid img-thumbnail"
+            class="image rounded img-fluid img-thumbnail m-auto"
           />
         </div>
-      </div>
-      <div class="my-2 row">
-        <div class="col-4">
-          <small class="fw-bold">Email:</small>
-        </div>
         <div class="col-8">
-          <span class="text-bold">{{ user.email }}</span>
-        </div>
-      </div>
-      <div class="my-2 row">
-        <div class="col-4">
-          <small class="fw-bold">Sexe:</small>
-        </div>
-        <div class="col-8">
-          <span class="text-bold">{{ userSexe }}</span>
-        </div>
-      </div>
-      <div class="my-2 row">
-        <div class="col-4">
-          <small class="fw-bold">Age:</small>
-        </div>
-        <div class="col-8">
-          <span class="text-bold">{{ userAge }}</span>
+          <div class="my-2 row">
+            <div class="col-4">
+              <small class="fw-bold">Email:</small>
+            </div>
+            <div class="col-8">
+              <span class="text-bold">{{ user.email }}</span>
+            </div>
+          </div>
+          <div class="my-2 row">
+            <div class="col-4">
+              <small class="fw-bold">Sexe:</small>
+            </div>
+            <div class="col-8">
+              <span class="text-bold">{{ userSexe }}</span>
+            </div>
+          </div>
+          <div class="my-2 row">
+            <div class="col-4">
+              <small class="fw-bold">Age:</small>
+            </div>
+            <div class="col-8">
+              <span class="text-bold">{{ userAge }}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -59,14 +61,13 @@ export default {
     };
   },
   watch: {
-
     $route() {
-    //   console.log(to);
-    //   console.log(to.params.id);
-    //   if(to.params.id){
-        //   this.id=to.params.id;
-          this.load();
-    //   }
+      //   console.log(to);
+      //   console.log(to.params.id);
+      //   if(to.params.id){
+      //   this.id=to.params.id;
+      this.load();
+      //   }
     },
   },
   created() {
@@ -104,7 +105,12 @@ export default {
 </script>
 <style>
 #cardUserImage {
-  max-height: 100%;
-  max-width: 100%;
+  max-height: 200px;
+  max-width: 100%  ;
+  margin: 5px auto !important;
+}
+small{
+  font-family: 'Times New Roman', Times, serif;
+  font-weight: bold;
 }
 </style>
