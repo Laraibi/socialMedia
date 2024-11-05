@@ -1,10 +1,13 @@
 <template>
   <div class="row">
     <div class="col-lg-6 col-sm-12">
-      <user-card :id="id" ></user-card>
+      <user-card :id="id"></user-card>
     </div>
     <div class="col-lg-6 col-sm-12">
-      <sent-message :receiverId="id" @pushMsg="addMessageInFront"></sent-message>
+      <sent-message
+        :receiverId="id"
+        @pushMsg="addMessageInFront"
+      ></sent-message>
       <el-timeline id="disscussion" class="my-2" v-loading="loading">
         <message
           v-for="(msg, key) in Messages"
@@ -40,19 +43,19 @@ export default {
       loading: true,
     };
   },
-  computed:{
-    newMessagesFromEcho(){
-      return state.newMessages
-    }
+  computed: {
+    newMessagesFromEcho() {
+      return state.newMessages;
+    },
   },
   watch: {
     id() {
       this.load();
     },
-    newMessagesFromEcho(newVal, oldVal){
-      console.log('wtach triged')
+    newMessagesFromEcho(newVal, oldVal) {
+      console.log("wtach triged");
       console.log(newVal[oldVal.length]);
-    }
+    },
   },
   methods: {
     load() {
@@ -65,12 +68,28 @@ export default {
         });
       }
     },
-    addMessageInFront(msg){
+    addMessageInFront(msg) {
       this.Messages.unshift(msg);
-    }
+    },
+    subscribeNewMessages() {
+      Echo.private("newMessage." + window.Laravel.user.id).listen(
+        "newMessage",
+        (e) => {
+          this.$notify({
+            title: "Success",
+            message: "New Message from " + e.Message.sender.name,
+            type: "success",
+            showClose: false,
+          });
+          // state.newMessages.push(e.Message);
+          this.addMessageInFront(e.Message);
+        }
+      );
+    },
   },
   created() {
     this.load();
+    this.subscribeNewMessages();
   },
 };
 </script>

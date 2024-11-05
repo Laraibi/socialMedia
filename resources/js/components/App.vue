@@ -46,7 +46,7 @@ export default {
   created() {
     if (window.Laravel.isLoggedin) {
       this.isLoggedIn = true;
-      this.subscribeNewMessages();
+      // this.subscribeNewMessages();
     }
   },
   methods: {
@@ -65,20 +65,20 @@ export default {
           });
       });
     },
-    subscribeNewMessages() {
-      Echo.private("newMessage." + window.Laravel.user.id).listen(
-        "newMessage",
-        (e) => {          
-          this.$notify({
-            title: "Success",
-            message: "New Message from " + e.Message.sender.name,
-            type: "success",
-            showClose: false,
-          });
-          state.newMessages.push(e.Message);
-        }
-      );
-    },
+    // subscribeNewMessages() {
+    //   Echo.private("newMessage." + window.Laravel.user.id).listen(
+    //     "newMessage",
+    //     (e) => {          
+    //       this.$notify({
+    //         title: "Success",
+    //         message: "New Message from " + e.Message.sender.name,
+    //         type: "success",
+    //         showClose: false,
+    //       });
+    //       state.newMessages.push(e.Message);
+    //     }
+    //   );
+    // },
   },
 };
 </script>
